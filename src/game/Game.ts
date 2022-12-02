@@ -2,8 +2,8 @@ import Key from '../notes/Key'
 
 class Game {
   #squares: {}[] = []
-  canvas = document.querySelector('canvas')
-  ctx = this.canvas.getContext('2d')
+  canvas = document.querySelector('canvas')  
+  ctx = this.canvas!.getContext('2d')
   width = window.innerWidth
   widthColumn = this.width / 10
   height = window.innerHeight
@@ -194,6 +194,14 @@ class Game {
           resolve()
         }, noteDuration * 1000)
     })
+
+    getScore = () => {
+      return this.score
+    }
+
+    resetScore = () => {
+      this.score = 0
+    }
 }
 
 export default new Game()

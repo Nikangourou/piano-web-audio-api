@@ -48,8 +48,6 @@ class Player {
 
     this.stop()
 
-	console.log('end')
-
     return new PlayerResult(false, true)
   }
 
