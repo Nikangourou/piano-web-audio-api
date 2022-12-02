@@ -18,3 +18,12 @@
     left: 20;
     top: 10;
 }
+
+.section_bestScore{
+    position: fixed;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    left: 20;
+    top: 10;
+}

@@ -45,6 +45,31 @@ export default class PresetSong {
     if (!Player.isPlaying) {
       button.textContent = 'Stop'
 
+      const API_URL = 'http://localhost:8001/api'
+      // get highscore
+
+      let bestScores = []
+
+      await fetch(API_URL, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          bestScores = json
+        })
+
+	
+	  const bestScore = bestScores.find((score) => score.title === this.#song.title)
+	  
+	  if (bestScore) {
+		Game.setBetsScore(bestScore.score)
+	  }else{
+		Game.setBetsScore(0)
+	  }
+
       card.addEventListener('click', () => this.stopAction(button, card), {
         once: true,
       })
@@ -57,7 +82,7 @@ export default class PresetSong {
           once: true,
         })
 
-       this.endGame()
+        this.endGame()
       }
     }
   }
@@ -75,21 +100,34 @@ export default class PresetSong {
   }
 
   endGame() {
-	const title = this.#song.title
-	const score = Game.getScore()
-	Game.resetScore()
+    const title = this.#song.title
+    const score = Game.getScore()
+    Game.resetScore()
 
+    // post score to database
+    const data = { title, score }
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }
 
-	//   // // post score to database
-	// const data = {title, score}
-	// const options = {
-	// 	method: 'POST',
-	// 	headers: {
-	// 		'Content-Type': 'application/json'
-	// 	},
-	// 	body: JSON.stringify(data)
-	// }
-	// fetch('/api', options)
-
+    const API_URL = 'http://localhost:8001/api'
+    // set score
+    fetch(API_URL, options).then(() => {
+      // get highscore
+      fetch(API_URL, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json)
+        })
+    })
   }
 }

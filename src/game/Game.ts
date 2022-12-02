@@ -9,6 +9,7 @@ class Game {
   height = window.innerHeight
   columns = [[], [], [], [], [], [], [], [], [], []]
   score = 0
+  bestScore = 0
 
   constructor() {}
 
@@ -54,8 +55,7 @@ class Game {
     // first id
     const lastId = this.columns[column][0]
 
-    
-
+  
     if (lastId) {
       this.#squares = this.#squares.filter((square) => square.id !== lastId)
       this.columns[column].shift()
@@ -75,6 +75,10 @@ class Game {
     const score = document.querySelector('.section_score')
     if (!score) throw new Error("score wasn't found in dom")
     score.innerHTML = 'Score: '+this.score
+
+    // const bestScore = document.querySelector('.section_bestScore')
+    // if (!bestScore) throw new Error("bestScore wasn't found in dom")
+    // bestScore!.innerHTML = 'Best Score: '+this.bestScore
 
     let gradient = this.ctx.createLinearGradient(0, 0, 0, this.height)
     gradient.addColorStop(0, '#46CEED')
@@ -197,6 +201,10 @@ class Game {
 
     getScore = () => {
       return this.score
+    }
+
+    setBetsScore = (score: number) => {
+      this.bestScore = score
     }
 
     resetScore = () => {
