@@ -1,0 +1,20 @@
+.section {
+    /* max-width: 80rem; */
+    /* width: 85%; */
+    margin: 0 auto;
+}
+
+.form-section {
+    margin: 3rem auto;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.section_score{
+    position: fixed;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    left: 20;
+    top: 10;
+}
