@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel serve src/index.html",
     "prettify": "prettier --config prettier.config.js --write 'src/**'",
-    "build": "webpack-cli"
+    "build": "parcel build src/index.html"
   },
   "author": "gasp",
   "license": "ISC",
